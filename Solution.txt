@@ -1,0 +1,209 @@
+-----------------------------------------------------------------------------------
+Creating a local repository.
+-----------------------------------------------------------------------------------
+
+Lenovo@Tushar MINGW64 ~
+$ mkdir local
+
+Lenovo@Tushar MINGW64 ~
+$ cd local
+
+Lenovo@Tushar MINGW64 ~/local
+$ git init
+Initialized empty Git repository in C:/Users/Lenovo/local/.git/
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ nano temp.txt
+Error in /etc/nanorc on line 237: Error expanding /usr/share/nano/*.nanorc: No such file or directory
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ git add .
+warning: LF will be replaced by CRLF in temp.txt.
+The file will have its original line endings in your working directory
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ git commit -m "this is temp file"
+[master (root-commit) e7ca96e] this is temp file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 temp.txt
+
+-----------------------------------------------------------------------------------
+Creating 2 braches as Dev and Test.
+-----------------------------------------------------------------------------------
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ git branch Dev
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ git branch Test
+
+-----------------------------------------------------------------------------------
+Commiting 1 file into Dev and 2 files into Test.
+-----------------------------------------------------------------------------------
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ git switch Dev
+Switched to branch 'Dev'
+
+Lenovo@Tushar MINGW64 ~/local (Dev)
+$ nano file-1.txt
+Error in /etc/nanorc on line 237: Error expanding /usr/share/nano/*.nanorc: No such file or directory
+
+Lenovo@Tushar MINGW64 ~/local (Dev)
+$ git add .
+warning: LF will be replaced by CRLF in file-1.txt.
+The file will have its original line endings in your working directory
+
+Lenovo@Tushar MINGW64 ~/local (Dev)
+$ git commit -m "Initial Commit"
+[Dev 793f350] Initial Commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file-1.txt
+
+Lenovo@Tushar MINGW64 ~/local (Dev)
+$ git switch Test
+Switched to branch 'Test'
+
+Lenovo@Tushar MINGW64 ~/local (Test)
+$ nano file-2.txt
+Error in /etc/nanorc on line 237: Error expanding /usr/share/nano/*.nanorc: No such file or directory
+
+Lenovo@Tushar MINGW64 ~/local (Test)
+$ nano file-3.txt
+Error in /etc/nanorc on line 237: Error expanding /usr/share/nano/*.nanorc: No such file or directory
+
+Lenovo@Tushar MINGW64 ~/local (Test)
+$ ls
+file-2.txt  file-3.txt  temp.txt
+
+Lenovo@Tushar MINGW64 ~/local (Test)
+$ git add .
+warning: LF will be replaced by CRLF in file-2.txt.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in file-3.txt.
+The file will have its original line endings in your working directory
+
+Lenovo@Tushar MINGW64 ~/local (Test)
+$ git commit -m "Initial Commit"
+[Test 68a9e60] Initial Commit
+ 2 files changed, 2 insertions(+)
+ create mode 100644 file-2.txt
+ create mode 100644 file-3.txt
+-----------------------------------------------------------------------------------
+Modifying 1st file some text.
+-----------------------------------------------------------------------------------
+Lenovo@Tushar MINGW64 ~/local (Test)
+$ git switch Dev
+Switched to branch 'Dev'
+
+Lenovo@Tushar MINGW64 ~/local (Dev)
+$ nano file-1.txt
+Error in /etc/nanorc on line 237: Error expanding /usr/share/nano/*.nanorc: No such file or directory
+
+Lenovo@Tushar MINGW64 ~/local (Dev)
+$ git add .
+
+Lenovo@Tushar MINGW64 ~/local (Dev)
+$ git commit -m "Welcome msg updated"
+[Dev 7f1dfca] Welcome msg updated
+ 1 file changed, 2 insertions(+)
+
+-----------------------------------------------------------------------------------
+Checking differences and status.
+-----------------------------------------------------------------------------------
+
+Lenovo@Tushar MINGW64 ~/local (Dev)
+$ git diff master Dev ./file-1.txt
+diff --git a/file-1.txt b/file-1.txt
+new file mode 100644
+index 0000000..fc0d207
+--- /dev/null
++++ b/file-1.txt
+@@ -0,0 +1,3 @@
++welcome to NeoSoft
++
++This is file 1
+
+-----------------------------------------------------------------------------------
+Finally merging all together in a master branch.
+-----------------------------------------------------------------------------------
+
+Lenovo@Tushar MINGW64 ~/local (Dev)
+$ git switch master
+Switched to branch 'master'
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ git merge Dev
+Updating e7ca96e..7f1dfca
+Fast-forward
+ file-1.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 file-1.txt
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ git merge Test
+Merge made by the 'recursive' strategy.
+ file-2.txt | 1 +
+ file-3.txt | 1 +
+ 2 files changed, 2 insertions(+)
+ create mode 100644 file-2.txt
+ create mode 100644 file-3.txt
+
+-----------------------------------------------------------------------------------
+Pushing this repository on your github.
+-----------------------------------------------------------------------------------
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ git remote add origin https://github.com/tushartz/git_assesment.git
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ git push -u origin master
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (15/15), 1.21 KiB | 413.00 KiB/s, done.
+Total 15 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), done.
+To https://github.com/tushartz/git_assesment.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+-----------------------------------------------------------------------------------
+Creating a clone for this repo from github to local system with another location.
+-----------------------------------------------------------------------------------
+
+Lenovo@Tushar MINGW64 ~/local (master)
+$ cd
+
+Lenovo@Tushar MINGW64 ~
+$ mkdir CloneDir
+
+Lenovo@Tushar MINGW64 ~
+$ cd CloneDir/
+
+Lenovo@Tushar MINGW64 ~/CloneDir
+$ git init
+Initialized empty Git repository in C:/Users/Lenovo/CloneDir/.git/
+
+Lenovo@Tushar MINGW64 ~/CloneDir (master)
+$ git clone https://github.com/tushartz/git_assesment.git
+Cloning into 'git_assesment'...
+remote: Enumerating objects: 15, done.
+remote: Counting objects: 100% (15/15), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 15 (delta 2), reused 15 (delta 2), pack-reused 0
+Receiving objects: 100% (15/15), done.
+Resolving deltas: 100% (2/2), done.
+Create a new file as Solution.txt in this cloned repository. 
+
+-----------------------------------------------------------------------------------
+Added all commands done in this Solution.txt file.
+
+git add .
+
+git commit -m "This Is solution.txt"
+
+git remote add origin https://github.com/tushartz/git_assesment.git
+
+git push -u origin master
